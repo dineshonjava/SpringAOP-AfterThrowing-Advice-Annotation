@@ -23,9 +23,9 @@ public class LoggingAspect {
 	 * @throws Throwable
 	 */
 	//@AfterThrowing("execution(* com.doj.aopapp.service.*.*(..))") // After Throwing advice with pointcut expression directly
-	@AfterThrowing("logForAllMethods()") //After Throwing advice with name pointcut that declared as name logForAllMethods()
-	public void afterThrowingAdviceForAllMethods(JoinPoint jp) throws Throwable {
-        System.out.println("****LoggingAspect.afterThrowingAdviceForAllMethods() " + jp.getSignature().getName());
+	@AfterThrowing(pointcut = "logForAllMethods()" , throwing="exc") //After Throwing advice with name pointcut that declared as name logForAllMethods()
+	public void afterThrowingAdviceForAllMethods(JoinPoint jp, Exception exc) throws Throwable {
+        System.out.println("****LoggingAspect.afterThrowingAdviceForAllMethods() " + jp.getSignature().getName() +" Exception: "+exc);
     }
 	
 	/**
@@ -34,9 +34,9 @@ public class LoggingAspect {
 	 * @param jp
 	 * @throws Throwable
 	 */
-	@AfterThrowing("execution(* com.doj.aopapp.service.*.transfer(*,*,*))")
-	public void afterThrowingAdviceForTransferMethods(JoinPoint jp) throws Throwable {
-        System.out.println("****LoggingAspect.afterThrowingAdviceForTransferMethods() " + jp.getSignature().getName());
+	@AfterThrowing(pointcut = "execution(* com.doj.aopapp.service.*.transfer(*,*,*))", throwing="exc")
+	public void afterThrowingAdviceForTransferMethods(JoinPoint jp, Exception exc) throws Throwable {
+        System.out.println("****LoggingAspect.afterThrowingAdviceForTransferMethods() " + jp.getSignature().getName() +" Exception: "+exc);
     }
 	
 	/**
